@@ -10,7 +10,15 @@ os.environ["CHROMA_ENABLE_TELEMETRY"] = "false"
 # --- 1. Configuration ---
 
 # Nom du fichier PDF à traiter
-PDF_FILE = ["data/Allergenes-FPO-Enseigne-MAJ-Janv-2024.pdf", "data/Allergenes-Pizza-Rhuys.pdf", "data/marco-fuso-recipe-booklet---final.pdf", "data/pizza-booklet-french-68623de5495cb223587169.pdf", "data/Pizza-booklet-French.pdf", "data/Pizza-maison.pdf", "data/Recette-pizza-au-fromage.pdf", "data/Tableau-des-allergenes.pdf"]  # Le chemin est relatif au script
+PDF_FILE = [
+    "data/Allergenes-FPO-Enseigne-MAJ-Janv-2024.pdf",
+    "data/Allergenes-Pizza-Rhuys.pdf",
+    "data/marco-fuso-recipe-booklet---final.pdf",
+    "data/pizza-booklet-french-68623de5495cb223587169.pdf",
+    "data/Pizza-booklet-French.pdf",
+    "data/Recette-pizza-au-fromage.pdf",
+    "data/Tableau-des-allergenes.pdf",
+]  # Le chemin est relatif au script
 # Nom de la collection dans ChromaDB
 # Une collection est comme une table dans une base de données traditionnelle.
 COLLECTION_NAME = "cours_rag_collection"
@@ -25,19 +33,19 @@ def load_and_chunk_pdf(PDF_FILE, chunk_size=1000, chunk_overlap=200):
     """
     Charge un fichier PDF, en extrait le texte et le découpe en morceaux (chunks).
     """
-    for file_path in PDF_FILE:
-        print(f"Chargement du fichier : {file_path}")
-        reader = PdfReader(file_path)
+    chunks = []
+    for file in PDF_FILE:
+        print(f"Chargement du fichier : {file}")
+        reader = PdfReader(file)
         text = "".join(page.extract_text() for page in reader.pages)
         print(f"Le document contient {len(text)} caractères.")
 
         print("Découpage du texte en chunks...")
-        chunks = []
         for i in range(0, len(text), chunk_size - chunk_overlap):
             # print(text[i : i + chunk_size])
             chunks.append(text[i : i + chunk_size])
         print(f"{len(chunks)} chunks ont été créés.")
-        return chunks
+    return chunks
 
 
 # --- 3. Initialisation de ChromaDB et de la fonction d'embedding ---
