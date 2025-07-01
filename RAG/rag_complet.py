@@ -15,7 +15,7 @@ COLLECTION_NAME = "cours_rag_collection"
 # Le modèle d'embedding (doit être le même que celui utilisé pour la création).
 EMBEDDING_MODEL = "mxbai-embed-large"
 # Le modèle de LLM à utiliser pour la génération de la réponse.
-LLM_MODEL = "llama3.2:latest"
+LLM_MODEL = "mistral:latest"
 
 # --- 2. Initialisation des clients ---
 
