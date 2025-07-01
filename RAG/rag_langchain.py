@@ -44,7 +44,7 @@ llm = ChatOllama(model=LLM_MODEL)
 
 # Le template du prompt pour le LLM.
 # Il inclut le contexte récupéré et la question de l'utilisateur.
-template = """Réponds à la question en te basant uniquement sur le contexte suivant:
+template = """Tu travailles dans la pizzeria 'Bella Napoli'. Réponds à la question en te basant uniquement sur le contexte suivant:
 {context}
 
 Question: {question}
